@@ -9,6 +9,7 @@ sap.ui.define([
         onInit: function () {
             
         },
+
         onRefresh: function () {
             var oBinding = this.byId("productsTable").getBinding("items");
             oBinding.refresh();
