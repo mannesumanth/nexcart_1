@@ -1,6 +1,112 @@
-<mvc:View controllerName="com.amista.nexcartui.controller.Master"
+<mvc:View
     xmlns:mvc="sap.ui.core.mvc"
-    xmlns="sap.m">
-    <Page id="page" title="{i18n>title}">
+    xmlns="sap.m"
+    xmlns:core="sap.ui.core"
+    controllerName="com.amista.nexcartui.controller.Master"
+>
+    <Page
+        id="page"
+        title="NexCart – Products"
+    >
+        <content>
+            <Table
+                id="productsTable"
+                items="{/Products}"
+                growing="true"
+                growingThreshold="20"
+            >
+                <headerToolbar>
+                    <Toolbar id="toolbar">
+                        <Title
+                            id="tableTitle"
+                            text="Product Catalogue"
+                        />
+                        <ToolbarSpacer id="spacer" />
+                        <Button
+                            id="refreshBtn"
+                            icon="sap-icon://refresh"
+                            press=".onRefresh"
+                            tooltip="Refresh"
+                        />
+                    </Toolbar>
+                </headerToolbar>
+                <columns>
+                    <Column id="colName">
+                        <Text
+                            id="colNameLbl"
+                            text="Name"
+                        />
+                    </Column>
+                    <Column
+                        id="colBrand"
+                        width="8rem"
+                    >
+                        <Text
+                            id="colBrandLbl"
+                            text="Brand"
+                        />
+                    </Column>
+                    <Column
+                        id="colPrice"
+                        width="7rem"
+                        hAlign="End"
+                    >
+                        <Text
+                            id="colPriceLbl"
+                            text="Price (₹)"
+                        />
+                    </Column>
+                    <Column
+                        id="colStock"
+                        width="6rem"
+                        hAlign="End"
+                    >
+                        <Text
+                            id="colStockLbl"
+                            text="Stock"
+                        />
+                    </Column>
+                    <Column
+                        id="colStatus"
+                        width="7rem"
+                        hAlign="Center"
+                    >
+                        <Text
+                            id="colStatusLbl"
+                            text="Available"
+                        />
+                    </Column>
+                </columns>
+                <items>
+                    <ColumnListItem id="productRow">
+                        <cells>
+                            <Text
+                                id="cellName"
+                                text="{NAME}"
+                            />
+                            <Text
+                                id="cellBrand"
+                                text="{BRAND}"
+                            />
+                            <ObjectNumber
+                                id="cellPrice"
+                                number="{PRICE}"
+                                unit="INR"
+                            />
+                            <ObjectNumber
+                                id="cellStock"
+                                number="{STOCK}"
+                                state="{= ${STOCK} > 10 ? 'Success' : ${STOCK} > 0 ? 'Warning' : 'Error'}"
+                            />
+                            <core:Icon
+                                id="cellAvailable"
+                                src="{= ${IS_AVAILABLE} ? 'sap-icon://accept' : 'sap-icon://decline'}"
+                                color="{= ${IS_AVAILABLE} ? '#107e3e' : '#bb0000'}"
+                            />
+                        </cells>
+                    </ColumnListItem>
+                </items>
+            </Table>
+        </content>
     </Page>
 </mvc:View>
